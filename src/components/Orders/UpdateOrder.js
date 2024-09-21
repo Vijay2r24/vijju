@@ -626,20 +626,20 @@ const UpdateOrder = () => {
   const steps = ['Personal Details', 'Order Details'];
 
   // Fetch order details on component load
-  useEffect(() => {
-    if (orderId) {
-      fetch(`https://imlystudios-backend-mqg4.onrender.com/api/orders/getOrderById/${orderId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setOrder(data.order); // Set order data
-        })
-        .catch((error) => {
-          console.error('Error fetching order:', error);
-          setAlertMessage('Failed to load order details');
-          setAlertType('error');
-        });
-    }
-  }, [orderId]);
+  // useEffect(() => {
+  //   if (orderId) {
+  //     fetch(`https://imlystudios-backend-mqg4.onrender.com/api/orders/getOrderById/${orderId}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setOrder(data.order); // Set order data
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error fetching order:', error);
+  //         setAlertMessage('Failed to load order details');
+  //         setAlertType('error');
+  //       });
+  //   }
+  // }, [orderId]);
 
   // Handle form submission and send PUT request to update the order
   const handleSubmit = (event) => {

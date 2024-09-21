@@ -528,6 +528,11 @@ import { IoIosSearch } from "react-icons/io";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, Button, TextField, InputAdornment } from "@mui/material";
 import { MdOutlineCancel } from "react-icons/md";
+import {OrderContext} from "../../Context/orderContext";
+import axios from "axios";
+import {GETORDERBYID_API} from "../../Constants/apiRoutes";
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -556,8 +561,30 @@ const Orders = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const navigate = useNavigate();
 
-  const handleOrderUpdate = (orderId) => {
-    navigate("/update-order", { state: { orderId } });
+  // const handleOrderUpdate = (orderId) => {
+  //   navigate("/Addorders", { state: { orderId } });const handleEditClick = async (roleId) => {
+  // };
+  const getOrderById = async (orderId) => {
+    try {
+      const response = await axios.get(
+        // `https://imlystudios-backend-mqg4.onrender.com/api/userrole/getRoleById/${roleId}`
+     `${GETORDERBYID_API}/${orderId}`,
+      );
+      console.log("UserRole retrieved successfully:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching UserRole:", error);
+      throw error;
+    }
+  };
+  const handleEditClick = async (orderId) => {
+    try {
+      const orderIdDetails= await getOrderById(orderId);
+      setOrderIdDetails(orderIdDetails);
+      navigate("/Addorders");
+    } catch (error) {
+      console.error("Error fetching UserRole details:", error);
+    }
   };
 
   const handleCancel = (id) => {
@@ -568,6 +595,7 @@ const Orders = () => {
       )
     );
   };
+
 
   const filteredOrders = products.filter(
     (product) =>
@@ -587,6 +615,7 @@ const Orders = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const { setOrderIdDetails } = useContext(OrderContext);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 pt-4 ml-10 lg:ml-72 w-auto">
@@ -729,7 +758,7 @@ const Orders = () => {
                   <StyledTableCell align="center">
                     <button
                       type="button"
-                      onClick={() => handleOrderUpdate(product.OrderID)}
+                      onClick={() => handleEditClick(product.OrderID)}
                       className=" m-0.5 inline-flex items-center gap-x-1 rounded-md bg-blue-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-blue-500"
                     >
                       <AiOutlineEdit aria-hidden="true" className="h-4 w-4" />

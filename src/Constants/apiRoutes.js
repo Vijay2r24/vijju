@@ -32,9 +32,10 @@ export const DELETEROLESBYID_API = `${BASE_URL}/userrole/deleteRole`;
 
 
 
-export const CREATE_ORDERS = `${BASE_URL}/orders/createOrder`;
+export const CREATE_ORDERS = `${BASE_URL}/orders/createOrderOrUpdate`;
 export const GET_ALL_ORDERS = `${BASE_URL}/orders/getAllOrders`;
 export const  SEARCH_CUSTOMERS= `${BASE_URL}/customers/getCustomerById`;
+// export const  GET_ALL_ORDERS_BYID= `${BASE_URL}/orders/getOrderById`;
 
 export const GETPAYMENTSBYID_API = `${BASE_URL}/payments/getPaymentById`;
 
@@ -42,3 +43,6 @@ export const GETPAYMENTSBYID_API = `${BASE_URL}/payments/getPaymentById`;
 export const CITIES_API = `${BASE_URL}/cities/getCitiesByState?$filter=StateID eq`;
 export const STATES_API = `${BASE_URL}/cities/getStatesByCountry?$filter=CountryID eq`;
 export const COUNTRIES_API = `${BASE_URL}/cities/getCountries`;
+export const GETORDERBYID_API = `${BASE_URL}/orders/getOrderById`;
+export const CREATEORUPDATE_PAYMENT_API=`${BASE_URL}/payments/payments/createOrUpdatePayment`;
+export const CREATEORUPDATE_ORDER_HISTORY__API=`${BASE_URL}/orderhistory/order-histories/createorderhistory`;
